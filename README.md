@@ -7,8 +7,7 @@ sql-practices
 - now you have a database of university ready in sqlite3. you can now create your own queries for practices in this database
 
 ### note
-### if you don't wish to create your own database then simply download "DB browser for SQLite and use "university.db" 
-### for practicing queries
+if you don't wish to create your own database then simply download "DB browser for SQLite and use "university.db" for practicing queries
 
 
 this repository is meant for practicing sql with reference to the book 
