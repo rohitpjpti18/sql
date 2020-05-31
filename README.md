@@ -9,6 +9,7 @@ sql-practices
 ### note
 if you don't wish to create your own database then simply download "DB browser for SQLite and use "university.db" for practicing queries
 
+---
 
 this repository is meant for practicing sql with reference to the book 
 "database system concepts by Abraham Silberschatz Henry F. Korth S. Sudarshan" and is not meant to make sense outside of it
