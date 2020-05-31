@@ -1,3 +1,11 @@
+CREATE TABLE time_slot(
+    time_slot_id    VARCHAR(4),
+    day             VARCHAR(1) CHECK (day IN ('M', 'T', 'W', 'R', 'F', 'S', 'U')),
+    start_time      TIME,
+    end_time        TIME,
+    PRIMARY KEY (time_slot_id, day, start_time)
+);
+
 CREATE TABLE classroom(
     building        VARCHAR(15),
     room_number     VARCHAR(7),
@@ -5,11 +13,31 @@ CREATE TABLE classroom(
     PRIMARY KEY (building, room_number)
 );
 
+
 CREATE TABLE department(
     dept_name       VARCHAR(20),
     building        VARCHAR(15),
     budget          NUMERIC(12,2),
     PRIMARY KEY (dept_name)
+);
+
+
+CREATE TABLE instructor(
+    ID              CHAR(5),
+    name            VARCHAR(20),
+    dept_name       VARCHAR(20),
+    salary          NUMERIC(8,0),
+    PRIMARY KEY(ID),
+    FOREIGN KEY (dept_name) REFERENCES department ON DELETE SET NULL
+);
+
+CREATE TABLE student(
+    ID              VARCHAR(5),
+    name            VARCHAR(20) NOT NULL,
+    dept_name       VARCHAR(20),
+    tot_cred        NUMERIC(3, 0) check (tot_cred>=0),
+    PRIMARY KEY (ID),
+    FOREIGN KEY (dept_name) REFERENCES department ON DELETE SET NULL
 );
 
 CREATE TABLE course(
@@ -32,7 +60,7 @@ CREATE TABLE section(
     room_number     VARCHAR(7),
     time_slot_id    VARCHAR(4),
     PRIMARY KEY (course_id, sec_id, semester, year),
-    FOREIGN KEY (course_id) REFERENCES courses ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES course ON DELETE CASCADE,
     FOREIGN KEY (building, room_number) REFERENCES classroom ON DELETE SET NULL
 );
 
@@ -47,14 +75,7 @@ CREATE TABLE teaches(
     FOREIGN KEY (ID) REFERENCES instructor ON DELETE CASCADE
 );
 
-CREATE TABLE student(
-    ID              VARCHAR(5),
-    name            VARCHAR(20) NOT NULL,
-    dept_name       VARCHAR(20),
-    tot_cred        NUMERIC(3, 0) check (tot_cred>=0),
-    PRIMARY KEY (ID),
-    FOREIGN KEY (dept_name) REFERENCES department ON DELETE SET NULL
-);
+
 
 CREATE TABLE takes(
     ID              VARCHAR(5),
@@ -85,10 +106,6 @@ CREATE TABLE prereq(
 );
 
 
-CREATE TABLE timeslot(
-    time_slot_id    VARCHAR(4),
-    day             VARCHAR(1) CHECK (day IN ('M', 'T', 'W', 'R', 'F', 'S', 'U')),
-    start_time      TIME,
-    end_time        TIME,
-    PRIMARY KEY (time_slot_id, day, start_time)
-);
+
+
+
